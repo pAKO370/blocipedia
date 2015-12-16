@@ -17,9 +17,34 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
 
-body {
-background-color: #f2f2f2;
-}
+
 .user-info {
   margin-top: 15px;
+}
+#show-btn {
+  margin-left: 15px;
+}
+body {
+  background-image: url("http://2.bp.blogspot.com/-IJJ8kPI8n0g/UOwelxzR9gI/AAAAAAAALS8/3IOqG_eBWsc/s1600/blackboard-backgrounds-wallpapers.jpg;");
+  color: white;
+}
+.jumbotron {
+  color: black;
+ 
+}
+.jumbotron h1 {
+  color: black;
+  font-family: 'Londrina Shadow', bold;
+  font-size: 72px;
+}
+a {
+  color: white;
+  margin-top: 10px;
+}
+input, select, textarea{
+    color: black;
+}
+
+textarea:focus, input:focus {
+    color: black;
 }
