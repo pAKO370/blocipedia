@@ -28,3 +28,5 @@
  gem 'bootstrap-sass'
  # devise for users
  gem 'devise'
+ #User Roles
+ gem 'pundit'
