@@ -32,3 +32,5 @@
  gem 'pundit'
  #for seeds
  gem 'faker'
+ # payment
+ gem 'stripe'
