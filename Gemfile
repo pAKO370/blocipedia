@@ -30,3 +30,5 @@
  gem 'devise'
  #User Roles
  gem 'pundit'
+ #for seeds
+ gem 'faker'
