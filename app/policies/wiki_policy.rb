@@ -12,7 +12,7 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def new?
-    current_user.standard?
+    current_user.standard? || current_user.admin?
   end
 
   def destroy?

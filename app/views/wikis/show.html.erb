@@ -8,6 +8,7 @@
 </br>
 </br>
   <%= link_to "Edit", edit_wiki_path(@wiki), class: 'btn btn-primary',id: 'show-btn' %>
-
+<% if current_user.admin?  %>
   <%= link_to "Delete", @wiki, method: :delete, class: 'btn btn-danger', id: 'show-btn' %>
+  <% end %>
 </div>
