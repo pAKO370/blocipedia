@@ -7,11 +7,15 @@ Rails.application.routes.draw do
 
   #get 'wikis/edit'
 
-  devise_for :users
+  resources :users, only: [:edit, :update]
+
+
+  devise_for :users 
 
   resources :wikis
 
   resources :charges
+  put '/charges/:user_id/downgrade' => 'charges#downgrade', as: 'downgrade_charges'
 
   get 'welcome/index'
 

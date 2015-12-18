@@ -25,18 +25,13 @@ class ChargesController < ApplicationController
     redirect_to new_charge_path
   end
 
-  def destroy
-    @customer = Customer.find(params[:id])
+    def downgrade
+    @user = User.find(params[:user_id])
 
+    @user.standard!
 
-    if @customer.destroy
-      current_user.standard!
-      flash[:notice] = "\"#{@wiki.title}\" was deleted"
-      redirect_to wikis_path
-    else
-      flash.now[:alert] = "There was an error deleting your wiki!"
-      render :show
-    end
+    flash[:notice] = "You have been downgraded to free account."
+    redirect_to welcome_index_path
   end
 
 end

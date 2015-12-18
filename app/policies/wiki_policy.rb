@@ -8,11 +8,11 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def edit?
-    current_user.standard? || current_user.admin?
+    current_user.standard? || current_user.admin? || current_user.premium?
   end
 
   def new?
-    current_user.standard? || current_user.admin?
+    current_user.standard? || current_user.admin? || current_user.premium?
   end
 
   def destroy?
