@@ -3,13 +3,17 @@ class WikisController < ApplicationController
   include Pundit
 
   def index
-
-    @wikis = Wiki.all
+   
+      @wikis = Wiki.all
+    
   end
 
   def show
     @wiki = Wiki.find(params[:id])
+
+    
   end
+
 
   def new
     @wiki = Wiki.new
@@ -21,7 +25,9 @@ class WikisController < ApplicationController
     @wiki.title = params[:wiki][:title]
     @wiki.body = params[:wiki][:body]
     @wiki.user = current_user
+    @wiki.private = params[:wiki][:private]
 
+    
     if @wiki.save
       flash[:notice] = "Wiki was saved"
       redirect_to @wiki

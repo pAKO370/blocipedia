@@ -10,7 +10,10 @@
 <div class="form-group">
   <%= f.label :body %>
   <%= f.text_area :body, rows: 18, class: 'form-control', placeholder: "Enter the body" %>
+
 </div>
+<%= render partial: 'form', locals: { f: f } %>
+
 <div class="form-group">
   <%= f.submit "Save", class: 'btn btn-success' %>
 </div>

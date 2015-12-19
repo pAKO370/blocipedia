@@ -6,6 +6,11 @@ class WikiPolicy < ApplicationPolicy
     @wiki = wiki
     @user = user
   end
+  def index?
+
+  end
+
+
 
   def edit?
     current_user.standard? || current_user.admin? || current_user.premium?

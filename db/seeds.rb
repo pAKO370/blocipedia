@@ -2,7 +2,8 @@ include Faker
 
 standard = User.create!(
   email: 'gsxr370k6@yahoo.com',
-  password: 'helloworld'
+  password: 'helloworld',
+  role: 'standard'
   )
 
 admin = User.create!(
@@ -17,7 +18,8 @@ users = User.all
   Wiki.create!(
     user: users.sample,
     title: Faker::Lorem.sentence,
-    body: Faker::Lorem.paragraphs(2)
+    body: Faker::Lorem.paragraphs(2),
+    private: 'false'
     )
 end
   
