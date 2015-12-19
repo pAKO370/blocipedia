@@ -7,6 +7,7 @@ class WikiPolicy < ApplicationPolicy
     @user = user
   end
   def index?
+    user.present?
 
   end
 

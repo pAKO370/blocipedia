@@ -10,11 +10,16 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  
   <div class="container">
     <ul class="nav nav-pills">
       <li><%= link_to "Blocipedia", root_path %></li>
       <li><%= link_to "Wikis", wikis_path %></li>
+      <% if current_user.premium? || current_user.admin? %>
+      <li><%= link_to "Private Wikis", private_wikis_path(current_user.id) %></li>
+      <% end %>
       <li><%= link_to "About", about_path %></li>
+      
       
       <div class="pull-right user-info">
         <% if user_signed_in? %>
@@ -44,9 +49,14 @@
         <%= flash[:alert] %>
       </div>
     <% end %>
+    
+  
+    
+
 
 <%= yield %>
 </div>
+
 
 </body>
 </html>

@@ -1,0 +1,26 @@
+<div id="wikis">
+
+<h1>Private Wikis</h1>
+
+
+<% if current_user.admin? || current_user.premium? %>
+<% @wikis.each do |wiki| %>
+<div class="media">
+  <div class="media-body">
+    <h4 class="media-heading">
+      <%= link_to wiki.title, wiki %>
+    </h4>
+    </div>
+  </div>
+
+<% end %>
+<% end %>
+
+</br>
+</br>
+  <% if current_user %>
+  <%= link_to "New", new_wiki_path(@wiki), class: 'btn btn-primary'%>
+  <% end %>
+</div>
+  </div>
+</div>

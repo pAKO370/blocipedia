@@ -4,8 +4,12 @@ class WikisController < ApplicationController
 
   def index
    
-      @wikis = Wiki.all
+      @wikis = Wiki.visible_to
     
+  end
+
+  def private 
+    @wikis = Wiki.visible_to_private
   end
 
   def show
@@ -46,6 +50,7 @@ class WikisController < ApplicationController
     @wiki = Wiki.find(params[:id])
     @wiki.title = params[:wiki][:title]
     @wiki.body = params[:wiki][:body]
+    @wiki.private = params[:wiki][:private]
 
     
 

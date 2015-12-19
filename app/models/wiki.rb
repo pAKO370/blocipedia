@@ -4,6 +4,7 @@ class Wiki < ActiveRecord::Base
   before_create :set_to_false
 
   scope :visible_to, -> { where(private: false) }
+  scope :visible_to_private, -> { where(private: true) }
 
   def title=(s)
     write_attribute(:title, s.to_s.capitalize)

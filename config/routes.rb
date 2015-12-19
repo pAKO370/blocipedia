@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   devise_for :users 
 
   resources :wikis
+  
+  get '/wikis/:user_id/private' => 'wikis#private', as: 'private_wikis'
 
   resources :charges
   put '/charges/:user_id/downgrade' => 'charges#downgrade', as: 'downgrade_charges'

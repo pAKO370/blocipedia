@@ -1,7 +1,8 @@
-<h1><%="Edit #{@wiki.title}"%></h1>
+<div id="wikis">
+  <h1><%="Edit #{@wiki.title}"%></h1>
 
-<div class="col-md-8">
-  <%= form_for @wiki do |f| %>
+  <div class="col-md-8">
+    <%= form_for @wiki do |f| %>
     <div class ="form-group">
       <%= f.label :title %>
       <%= f.text_field :title, class: 'form-control', placeholder: "Enter the title" %>
@@ -9,12 +10,14 @@
     <div class="form-group">
       <%= f.label :body %>
       <%= f.text_area :body, rows:18, class: 'form-control', placeholder: "Enter the body"%>
+      <%= render partial: 'form', locals: { f: f } %>
     </br>
 
-      <div class="form-group">
-        
-        <%= f.submit "Save", class: 'btn btn-sucess' %>
-       
-      </div>
-      <% end %>
+    <div class="form-group">
+      
+      <%= f.submit "Save", class: 'btn btn-sucess' %>
+      
+    </div>
+    <% end %>
+  </div>
 </div>
