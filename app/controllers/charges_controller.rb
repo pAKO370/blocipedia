@@ -27,11 +27,22 @@ class ChargesController < ApplicationController
 
     def downgrade
     @user = User.find(params[:user_id])
+    @wikis = Wiki.find(params[:user_id])
 
     @user.standard!
 
+    wiki_private = @wikis.where(private: "true")
+
+    wiki_private.private.each do |pri|
+      pri.update_attribute = 'false'
+    end
+    
+
     flash[:notice] = "You have been downgraded to free account."
     redirect_to welcome_index_path
+
+
+    
   end
 
 end
