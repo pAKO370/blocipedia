@@ -9,7 +9,10 @@
   <div class="media-body">
     <h4 class="media-heading">
       <%= link_to wiki.title, wiki %>
+        <% if wiki.private == true %>
+        <small id="private">private</small>
     </h4>
+    <% end %>
     </div>
   </div>
 
