@@ -6,9 +6,9 @@ class WikiPolicy < ApplicationPolicy
     @wiki = wiki
     @user = user
   end
+
   def index?
     
-
   end
 
 
