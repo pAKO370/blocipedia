@@ -27,14 +27,14 @@ class ChargesController < ApplicationController
 
     def downgrade
     @user = User.find(params[:user_id])
-    @wikis = Wiki.find(params[:user_id])
+    @wikis = Wiki.where(user: @user)
 
     @user.standard!
 
-    wiki_private = @wikis.where(private: "true")
+    #@wiki_private = @wikis.where(private: true)
 
-    wiki_private.private.each do |pri|
-      pri.update_attribute = 'false'
+    @wikis.each do |pri|
+      pri.private = false
     end
     
 
