@@ -34,3 +34,6 @@
  gem 'faker'
  # payment
  gem 'stripe'
+ #markdown
+ gem 'redcarpet'
+ 
