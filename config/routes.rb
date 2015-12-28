@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'collaborators/create'
+
+  get 'collaborators/delete'
+
   #get 'wikis/index'
 
   #get 'wikis/show'
@@ -24,6 +28,8 @@ Rails.application.routes.draw do
   get 'about' => 'welcome#about'
 
   root 'welcome#index'
+
+  resources :collaborators
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

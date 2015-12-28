@@ -17,4 +17,23 @@
   
   <% end %>
 
+  <div class= "pull-right">
+  <% if current_user && @wiki.private && (current_user.admin? || current_user.premium?) %>
+  <% User.all.each do |user| %>
+  
+  <% if user.premium? || user.admin? #&& user.collaborators.include?(@wiki.id) %>
+  
+    <%= link_to "Add #{user.email} as collaborator", collaborators_path(wiki_id: @wiki.id, user_id: user.id), method: :post, class: 'btn btn-xs btn-success' %>
+    <% elsif user.premium? || user.admin? %>
+     <% user %>
+    <%= link_to "Remove #{user.email} as collaborator", collaborators_path, method: :delete, class: 'btn btn-xs btn-danger' %>
+    <% else %>
+
+  </br>
+  
+<% end %>
+<% end %>
+<% end %>
+</div>
+
 </div>
