@@ -1,14 +1,16 @@
 class Wiki < ActiveRecord::Base
   belongs_to :user
+  has_many :collaborators
+  has_many :users, through: :collaborators
   validates :user, presence: true
   before_create :set_to_false
 
   scope :visible_to, -> (user) do
     if user.admin?
       all
-    elsif user.premium?
+    elsif user.premium? 
       where("private = 'f' OR user_id = ?", user.id)
-    else
+    else 
       where(private: false)
     end
   end

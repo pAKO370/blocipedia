@@ -1,5 +1,6 @@
 <div id="wikis">
 <h1><%=@wiki.title%></h1>
+<h5>Created by: <%=@wiki.user.email%></h5>
 
 <div class="row">
   <div class="col-md-8">
@@ -12,28 +13,23 @@
 <% if current_user %>
   <%= link_to "Edit", edit_wiki_path(@wiki), class: 'btn btn-primary',id: 'show-btn' %>
   <% end %>
-<% if current_user && current_user.admin?  %>
-  <%= link_to "Delete", @wiki, method: :delete, class: 'btn btn-danger', id: 'show-btn' %>
-  
-  <% end %>
+    <% if current_user && current_user.admin?  %>
+      <%= link_to "Delete", @wiki, method: :delete, class: 'btn btn-danger', id: 'show-btn' %>
+    <% end %>   
+    
+    <div class= "pull-right">     
+      <% if current_user && @wiki.private && (current_user.admin? || current_user.premium?) %>     
+        <% User.all.each do |user| %>
+          <% if user == current_user %>
+          <% elsif Collaborator.exists?(user: user, wiki: @wiki) %>
+            <%= link_to "Remove #{user.email} as collaborator", collaborators_path(wiki_id: @wiki.id, user_id: user.id), method: :delete, class: 'btn btn-xs btn-danger' %>
+          <% else %>
+            <%= link_to "Add #{user.email} as collaborator", collaborators_path(wiki_id: @wiki.id, user_id: user.id), method: :post, class: 'btn btn-xs btn-success' %>
 
-  <div class= "pull-right">
-  <% if current_user && @wiki.private && (current_user.admin? || current_user.premium?) %>
-  <% User.all.each do |user| %>
+      </br>
   
-  <% if user.premium? || user.admin? #&& user.collaborators.include?(@wiki.id) %>
-  
-    <%= link_to "Add #{user.email} as collaborator", collaborators_path(wiki_id: @wiki.id, user_id: user.id), method: :post, class: 'btn btn-xs btn-success' %>
-    <% elsif user.premium? || user.admin? %>
-     <% user %>
-    <%= link_to "Remove #{user.email} as collaborator", collaborators_path, method: :delete, class: 'btn btn-xs btn-danger' %>
-    <% else %>
-
-  </br>
-  
-<% end %>
-<% end %>
-<% end %>
-</div>
-
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
 </div>

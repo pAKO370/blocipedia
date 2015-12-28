@@ -1,25 +1,21 @@
 <div id="wikis">
   <h1>Wikis</h1>
 
-  <% @wikis.each do |wiki| %>
-  <div class="media">
-    <div class="media-body">
-      <h4 class="media-heading">
-        <% if current_user && current_user.standard?%>
-        <%= link_to wiki.title, wiki%>
-        
-        <% else current_user && (current_user == current_user.premium? || current_user == current_user.admin?)%>
-        <%= link_to wiki.title, wiki %>
-        <% if wiki.private == true %>
-        <small id="private">private</small>
-      </h4>
-      <% end %>
-      <% end %>
-    
+<% @wikis.each do |wiki| %>
+<div class="media">
+  <div class="media-body">
+    <h4 class="media-heading">
+      <div>
+      <%= link_to wiki.title, wiki%> 
+      <small><%=" ----Created by: #{wiki.user.email}----"%></small>
+      <% if wiki.private == true %>
+        <small id="private">                  private</small>
+      </div>
+    </h4>
     </div>
   </div>
-
-  <% end %>
+<% end %>
+<% end %>
 
 </br>
 </br>
