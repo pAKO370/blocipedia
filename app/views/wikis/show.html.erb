@@ -1,35 +1,35 @@
 <div id="wikis">
-<h1><%=@wiki.title%></h1>
-<h5>Created by: <%=@wiki.user.email%></h5>
+  <h1><%=@wiki.title%></h1>
+  <h5>Created by: <%=@wiki.user.email%></h5>
 
-<div class="row">
-  <div class="col-md-8">
-    <h4><%= markdown.render(@wiki.body).html_safe%></h4>
+  <div class="row">
+    <div class="col-md-8">
+      <h4><%= markdown.render(@wiki.body).html_safe%></h4>
+    </div>
+
+</br>
+</br>
   </div>
 
-</br>
-</br>
-</div>
-<% if current_user %>
-  <%= link_to "Edit", edit_wiki_path(@wiki), class: 'btn btn-primary',id: 'show-btn' %>
+  <% if policy(@wiki).edit? %>
+    <%= link_to "Edit", edit_wiki_path(@wiki), class: 'btn btn-primary',id: 'show-btn' %>
   <% end %>
-    <% if current_user && current_user.admin?  %>
-      <%= link_to "Delete", @wiki, method: :delete, class: 'btn btn-danger', id: 'show-btn' %>
-    <% end %>   
-    
-    <div class= "pull-right">     
-      <% if current_user && @wiki.private && (current_user.admin? || current_user.premium?) %>     
-        <% User.all.each do |user| %>
-          <% if user == current_user %>
-          <% elsif Collaborator.exists?(user: user, wiki: @wiki) %>
-            <%= link_to "Remove #{user.email} as collaborator", collaborators_path(wiki_id: @wiki.id, user_id: user.id), method: :delete, class: 'btn btn-xs btn-danger' %>
-          <% else %>
-            <%= link_to "Add #{user.email} as collaborator", collaborators_path(wiki_id: @wiki.id, user_id: user.id), method: :post, class: 'btn btn-xs btn-success' %>
-
-      </br>
-  
-          <% end %>
+  <% if policy(@wiki).destroy? %>
+    <%= link_to "Delete", @wiki, method: :delete, class: 'btn btn-danger', id: 'show-btn' %>
+  <% end %> <!--Buttons for certain users-->  
+      
+  <div class= "pull-right">     
+    <% if current_user && @wiki.private && (current_user.admin? || current_user.premium?) %>     
+      <% User.all.each do |user| %>
+        <% if user == current_user %>
+        <% elsif Collaborator.exists?(user: user, wiki: @wiki) %>
+          <%= link_to "Remove #{user.email} as collaborator", collaborators_path(wiki_id: @wiki.id, user_id: user.id), method: :delete, class: 'btn btn-xs btn-danger' %>
+        </br><!--stacks collaborators vertically-->
+        <% else %>
+          <%= link_to "Add #{user.email} as collaborator", collaborators_path(wiki_id: @wiki.id, user_id: user.id), method: :post, class: 'btn btn-xs btn-success' %>
+        </br>          
         <% end %>
       <% end %>
-    </div>
+    <% end %>
+  </div>
 </div>

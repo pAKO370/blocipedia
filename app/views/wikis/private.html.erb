@@ -1,29 +1,29 @@
-<div id="wikis">
+<div id="wikis"><!--Only shows users private wikis-->
 
 <h1>Private Wikis</h1>
 
 
 <% if current_user.admin? || current_user.premium? %>
-<% @wikis.each do |wiki| %>
-<div class="media">
-  <div class="media-body">
-    <h4 class="media-heading">
-      <%= link_to wiki.title, wiki %>
-        <% if wiki.private == true %>
-        <small id="private">private</small>
-    </h4>
-    <% end %>
+  <% @wikis.each do |wiki| %>
+    <div class="media">
+      <div class="media-body">
+        <h4 class="media-heading">
+          <%= link_to wiki.title, wiki %>
+            <% if wiki.private == true %>
+              <small id="private">private</small>
+        </h4>
+            <% end %>
+      </div>
     </div>
-  </div>
 
-<% end %>
+  <% end %>
 <% end %>
 
 </br>
 </br>
   <% if current_user %>
-  <%= link_to "New", new_wiki_path(@wiki), class: 'btn btn-primary'%>
+    <%= link_to "New", new_wiki_path(@wiki), class: 'btn btn-primary'%>
   <% end %>
-</div>
   </div>
+</div>
 </div>

@@ -1,26 +1,32 @@
 <div id="wikis">
-  <h1>Wikis</h1>
-
-<% @wikis.each do |wiki| %>
-<div class="media">
-  <div class="media-body">
-    <h4 class="media-heading">
-      <div>
-      <%= link_to wiki.title, wiki%> 
-      <small><%=" ----Created by: #{wiki.user.email}----"%></small>
-      <% if wiki.private == true %>
-        <small id="private">                  private</small>
-      </div>
-    </h4>
-    </div>
+  <div><!--added 2nd button to top-->
+    <% if current_user %>
+      <h1>Wikis <%= link_to "New", new_wiki_path(@wiki), class: 'btn btn-primary btn-sm move-button'%>
+    <% end %>
+      </h1>
   </div>
-<% end %>
-<% end %>
+
+
+  <% @wikis.each do |wiki| %>
+    <div class="media">
+      <div class="media-body">
+        <h4 class="media-heading">
+          <div>
+            <%= link_to wiki.title, wiki%> 
+            <small><%=" ----Created by: #{wiki.user.email}----"%></small>
+            <% if wiki.private == true %>
+            <small id="private">                  private</small><!--added small label for user email and private-->
+          </div>
+        </h4>
+      </div>
+    </div>
+  <% end %>
+  <% end %>
 
 </br>
 </br>
     <% if current_user %>
-    <%= link_to "New", new_wiki_path(@wiki), class: 'btn btn-primary'%>
+      <%= link_to "New", new_wiki_path(@wiki), class: 'btn btn-primary'%>
     <% end %>
     </div>
   </div>

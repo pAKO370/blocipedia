@@ -20,11 +20,13 @@ class WikiPolicy < ApplicationPolicy
   def new?
     current_user.standard? || current_user.admin? || current_user.premium?
   end
+  def show?
+    current_user || current_user.admin? || current_user.premium?
+  end
 
   def destroy?
-
-    current_user.admin? || current_user == wiki.user
-    end
+    current_user && (current_user.admin? || current_user == wiki.user)
+  end
 
     class Scope
      attr_reader :user, :scope
