@@ -22,13 +22,12 @@
       
   <div class="col-md-4">
     <h2>Create private wikis!</h2>
-    <h6>Create a free plan and upgrade to premium!</h6>
       <% if user_signed_in?  && current_user.premium? %>
     <h6> You are currently a premium member!</h6>
-
       <% elsif current_user && current_user.standard? %>
         <%= link_to "Upgrade to a Premium Plan",new_charge_path, :class => 'btn btn-info btn-large' %>
       <% else %>
+        <h6>Create a free plan and upgrade to premium!</h6>
       <% end %>
       
     </div>
