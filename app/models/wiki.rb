@@ -14,13 +14,14 @@ class Wiki < ActiveRecord::Base
       where(private: false)
     end
   end
-  scope :visible_to_private, -> { where(private: true) }
+  #scope that displays only public wikis
+  scope :visible_to_private, -> { where(private: false) }
 
-  def title=(s)
+  def title=(s) #capitalizes first letter of wiki title
     write_attribute(:title, s.to_s.capitalize)
   end
 
-  def set_to_false
+  def set_to_false # sets wiki.private to false when created
     if self.private == nil 
      self.private = "false"
     end

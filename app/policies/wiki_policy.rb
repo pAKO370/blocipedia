@@ -21,14 +21,14 @@ class WikiPolicy < ApplicationPolicy
     current_user.standard? || current_user.admin? || current_user.premium?
   end
   def show?
-    current_user || current_user.admin? || current_user.premium?
+    current_user == nil || current_user.admin? || current_user.premium?
   end
 
   def destroy?
     current_user && (current_user.admin? || current_user == wiki.user)
   end
 
-    class Scope < WikiPolicy
+    class Scope < WikiPolicy #displays wikis depending on role
      attr_reader :user, :scope
  
      def initialize(user, scope)
@@ -38,9 +38,7 @@ class WikiPolicy < ApplicationPolicy
  
      def resolve
        wikis = []
-       if user
-        wikis = !wikis.private
-       elsif @user.admin?
+       if @user.admin?
          wikis = scope.all # if the user is an admin, show them all the wikis
        elsif user.role == 'premium'
          all_wikis = scope.all
