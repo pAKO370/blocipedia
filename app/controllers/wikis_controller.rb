@@ -3,9 +3,11 @@ class WikisController < ApplicationController
 include Pundit
 
 def index
- 
-    @wikis = policy_scope(Wiki)
-  
+  if current_user
+  @wikis = policy_scope(Wiki)
+  else #added to show public wikis to user without a role
+    @wikis = Wiki.visible_to_private
+  end
 end
 
 def private 
