@@ -40,4 +40,6 @@
  gem 'stripe'
  #markdown
  gem 'redcarpet'
+ # for enviroment variables
+ gem 'figaro', '1.0'
  
